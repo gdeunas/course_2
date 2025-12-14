@@ -3,38 +3,38 @@ from abc import ABC, abstractmethod
 import requests
 
 
-class GetApi(ABC):
-    """abstract class to get api"""
+# class GetApi(ABC):
+#     """abstract class to get api"""
+#
+#     pass
+#
+#
+# class GetApiHH(GetApi):
+#     """get api HH"""
+#
+#     @staticmethod
+#     def get_api():
+#         pass
 
-    pass
 
-
-class GetApiHH(GetApi):
-    """get api HH"""
-
-    @staticmethod
-    def get_api():
-        pass
-
-
-class Parser1:
-    """parser api"""
-
-    @staticmethod
-    def get_api():
-        url_get = "https://api.hh.ru/vacancies"
-        response = requests.get(url_get)
-        if response.status_code == 200:
-            print(response.json())
-
-    @staticmethod
-    def post_api():
-        url_post = "https://api.hh.ru/vacancies"
-        response = requests.post(url_post)
-        if response.status_code == 200:
-            print(response.json())
-        else:
-            print("code= ", response.status_code)
+# class Parser1:
+#     """parser api"""
+#
+#     @staticmethod
+#     def get_api():
+#         url_get = "https://api.hh.ru/vacancies"
+#         response = requests.get(url_get)
+#         if response.status_code == 200:
+#             print(response.json())
+#
+#     @staticmethod
+#     def post_api():
+#         url_post = "https://api.hh.ru/vacancies"
+#         response = requests.post(url_post)
+#         if response.status_code == 200:
+#             print(response.json())
+#         else:
+#             print("code= ", response.status_code)
 
 
 class Parser(ABC):
@@ -44,7 +44,6 @@ class Parser(ABC):
     """
 
     def __init__(self, file_worker):
-        # file_worker предполагается объектом, который умеет сохранять и читать данные.
         self.file_worker = file_worker
         self.vacancies = []
 
@@ -82,7 +81,3 @@ class FileWorker:
     def read_data(self):
         """read data from file"""
         pass
-
-
-if __name__ == "__main__":
-    Parser1.post_api()
