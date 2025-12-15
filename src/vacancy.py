@@ -9,18 +9,18 @@ class Vacancy:
     ]
 
     def __init__(
-            self,
-            hh: list[dict[str, Any]],
+        self,
+        hh: list[dict[str, Any]],
     ) -> None:
         self.hh = hh
 
     def get_data(
-            self,
-            city_filter: str = "Москва",
-            salary_from: str = "50000",
-            currency: str = "RUR",
-            experience: str = "noExperience",
-            type_id: str = "open",
+        self,
+        city_filter: str = "Москва",
+        salary_from: str = "50000",
+        currency: str = "RUR",
+        experience: str = "noExperience",
+        type_id: str = "open",
     ) -> list[dict[str, Any]]:
         """filtered data
         city_filter=['Москва', 'Казань',...]
@@ -38,8 +38,8 @@ class Vacancy:
             if not salary_info or salary_info.get("currency") != currency:
                 continue
             if (
-                    vacancy.get("experience", {}).get("id") != experience
-                    or vacancy.get("type", {}).get("id") != type_id
+                vacancy.get("experience", {}).get("id") != experience
+                or vacancy.get("type", {}).get("id") != type_id
             ):
                 continue
             vacancy_salary = salary_info.get("from") or 0
@@ -52,23 +52,15 @@ class Vacancy:
                     "area": area_name,
                 }
                 filtered_vacancies.append(vacancy_info)
-                # # Вывод в консоль
-                # print(f"{vacancy['name']}")
-                # print(f"{salary_info.get('from', 0)} {currency}")
-                # print(f"{vacancy.get('employer', {}).get('name', 'N/A')}")
-                # print(f"{vacancy_info['url']}")
-                # # print(f"https://hh.ru/vacancy/{vacancy.get('id')}?hhtmFrom=vacancy_search_list")
-                # print("-" * 60)
-
         return filtered_vacancies
 
     def show_data(
-            self,
-            city_filter: str = "Москва",
-            salary_from: str = "50000",
-            currency: str = "RUR",
-            experience: str = "noExperience",
-            type_id: str = "open",
+        self,
+        city_filter: str = "Москва",
+        salary_from: str = "50000",
+        currency: str = "RUR",
+        experience: str = "noExperience",
+        type_id: str = "open",
     ) -> None:
         """Выводит отфильтрованные вакансии в консоль"""
         vacancies = self.get_data(

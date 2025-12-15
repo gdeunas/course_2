@@ -20,10 +20,15 @@ class HH(Parser):
 
     def load_vacancies(self, keyword: str) -> List[Dict[str, Any]]:
         self.params["text"] = keyword
-        while self.params.get("page") != 20:
-            response = requests.get(self.url, headers=self.headers, params=self.params)
-            vacancies = response.json()["items"]
-            # print(vacancies)
-            self.vacancies.extend(vacancies)
-            self.params["page"] += 1
+        response = requests.get(self.url)
+        if response.status_code == 200:
+            while self.params.get("page") != 20:
+                response = requests.get(self.url, headers=self.headers, params=self.params)
+                vacancies = response.json()["items"]
+                # print(vacancies)
+                self.vacancies.extend(vacancies)
+                self.params["page"] += 1
+        else:
+            print(f'{response.status_code}')
+
         return self.vacancies
