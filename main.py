@@ -9,8 +9,8 @@ if __name__ == "__main__":
     # 2.Filtered data
     filtered_data = Vacancy(vacancy_data)
     vacancy_filtered = filtered_data.get_data(city_filter="Казань")
+    # filtered_data.show_data(city_filter="Казань")
     print("Поиск вакансии завершен!")
 
-    # filtered_data.show_data(city_filter="Казань")
     # 3. Store json to file
     # saved = SaveToJson.save_to_json()
