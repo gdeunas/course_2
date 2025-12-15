@@ -1,21 +1,19 @@
-from src.get_api import GetApi
+from abc import ABC
+
+from src.get_api import Parser
 
 
-class SaveToFile(GetApi):
+class SaveToFile(Parser, ABC):
     """save to file"""
 
-    pass
-
-
-class SaveToJson(SaveToFile):
-    """save to json"""
+    def SaveToJson(self):
+        """save to json"""
 
     @staticmethod
     def save_to_json():
         pass
 
-
-class SaveToXL(SaveToFile):
-    """save to xl"""
+    def SaveToXL(self):
+        """save to xl"""
 
     pass

@@ -1,10 +1,14 @@
-from src.get_api import GetApiHH
-from src.save_to_file import SaveToJson
-from src.vacancies import GetVacancies
+from src.hh import HH
+from src.vacancy import Vacancy
 
 if __name__ == "__main__":
-    getdata = GetApiHH.get_api()
+    # 1. Get data from Api requests
+    print("Идет поиск вакансии...")
+    vacancy_data = HH("fw").load_vacancies("Python")
 
-    filtered_data = GetVacancies.filter_data()
+    # 2.Filtered data
+    filtered_data = Vacancy(vacancy_data).get_data(city_filter="Казань")
+    print("Поиск вакансии завершен!")
 
-    saved = SaveToJson.save_to_json()
+    # 3. Store json to file
+    # saved = SaveToJson.save_to_json()

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
+from typing import Any, Dict, List
 
 import requests
-
 
 # class GetApi(ABC):
 #     """abstract class to get api"""
@@ -48,7 +48,7 @@ class Parser(ABC):
         self.vacancies = []
 
     @abstractmethod
-    def load_vacancies(self, keyword):
+    def load_vacancies(self, keyword: str) -> List[Dict[str, Any]]:
         """
         Абстрактный метод для загрузки вакансий по ключевому слову.
         Должен быть реализован в дочерних классах (например, HH, SuperJob).
