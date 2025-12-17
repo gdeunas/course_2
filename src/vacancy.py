@@ -16,7 +16,7 @@ class Vacancy:
 
     def get_data(
         self,
-        city_filter: str = "Москва",
+        city_filter: str = "Казань",
         salary_from: str = "50000",
         currency: str = "RUR",
         experience: str = "noExperience",
@@ -27,6 +27,9 @@ class Vacancy:
         experience = ['noExperience', 'between1And3','between3And6', 'moreThan6']
         currency = ['RUR', 'USD', 'KZT']
         """
+        if not city_filter:
+            city_filter = "Казань"
+
         salary_from_int = int(salary_from)
         filtered_vacancies = []
 
@@ -45,6 +48,7 @@ class Vacancy:
             vacancy_salary = salary_info.get("from") or 0
             if salary_from_int <= vacancy_salary:
                 vacancy_info = {
+                    "id": vacancy.get("id"),
                     "name": vacancy["name"],
                     "salary": f"{salary_info.get('from', 0)} {currency}",
                     "employer": vacancy.get("employer", {}).get("name", "N/A"),
@@ -72,6 +76,7 @@ class Vacancy:
             return
 
         for vacancy in vacancies:
+            print(f"id: {vacancy['id']}")
             print(f"Название: {vacancy['name']}")
             print(f"Зарплата: {vacancy['salary']}")
             print(f"Работодатель: {vacancy['employer']}")

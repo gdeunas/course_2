@@ -1,40 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List
-
-import requests
-
-# class GetApi(ABC):
-#     """abstract class to get api"""
-#
-#     pass
-#
-#
-# class GetApiHH(GetApi):
-#     """get api HH"""
-#
-#     @staticmethod
-#     def get_api():
-#         pass
-
-
-# class Parser1:
-#     """parser api"""
-#
-#     @staticmethod
-#     def get_api():
-#         url_get = "https://api.hh.ru/vacancies"
-#         response = requests.get(url_get)
-#         if response.status_code == 200:
-#             print(response.json())
-#
-#     @staticmethod
-#     def post_api():
-#         url_post = "https://api.hh.ru/vacancies"
-#         response = requests.post(url_post)
-#         if response.status_code == 200:
-#             print(response.json())
-#         else:
-#             print("code= ", response.status_code)
+from typing import Any
 
 
 class Parser(ABC):
@@ -43,41 +8,21 @@ class Parser(ABC):
     Определяет общий интерфейс для работы с API и файлами.
     """
 
-    def __init__(self, file_worker):
+    def __init__(self, file_worker: str):
         self.file_worker = file_worker
-        self.vacancies = []
+        self.vacancies: list[dict] = []
 
     @abstractmethod
-    def load_vacancies(self, keyword: str) -> List[Dict[str, Any]]:
+    def load_vacancies(self, keyword: str) -> list[dict[str, Any]]:
         """
         Абстрактный метод для загрузки вакансий по ключевому слову.
         Должен быть реализован в дочерних классах (например, HH, SuperJob).
         """
         pass
 
-    def save_to_file(self):
-        """
-        Общий метод для сохранения загруженных вакансий в файл с помощью file_worker.
-        """
-        self.file_worker.write_data(self.vacancies)
-
-    def load_from_file(self):
-        """
-        Общий метод для загрузки вакансий из файла с помощью file_worker.
-        """
-        self.vacancies = self.file_worker.read_data()
-
 
 class FileWorker:
     """file worker class"""
 
-    def __init__(self, filename):
+    def __init__(self, filename: str) -> None:
         self.filename = filename
-
-    def write_data(self, data):
-        """write data to file"""
-        pass
-
-    def read_data(self):
-        """read data from file"""
-        pass
