@@ -3,12 +3,13 @@ name = "course-2"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "aidar",email = "anged@mail.ru"}
+    { name = "aidar", email = "anged@mail.ru" }
 ]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "requests (>=2.32.5)",
+    "requests-mock (>=1.12.1,<2.0.0)",
 ]
 
 

@@ -26,12 +26,10 @@ class HH(Parser):
         response = requests.get(self.url)
         if response.status_code == 200:
             while self.params.get("page") != 20:
-                response = requests.get(
-                    self.url, headers=self.headers, params=self.params
-                )
+                response = requests.get(self.url, headers=self.headers, params=self.params)  # type: ignore[arg-type]
                 vacancies = response.json()["items"]
                 self.vacancies.extend(vacancies)
-                self.params["page"] += 1
+                self.params["page"] += 1  # type: ignore[operator]
         else:
             print(f"{response.status_code}")
 

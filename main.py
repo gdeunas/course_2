@@ -27,7 +27,7 @@ def user_interaction():
     file_json.add_data_to_file(vacancy_filtered)
 
     # 4. Delete vacancy id '128373566' from file
-    # file_json.del_data_from_file('128373566')
+    file_json.del_data_from_file("128373566")
 
 
 if __name__ == "__main__":
