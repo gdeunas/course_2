@@ -38,8 +38,8 @@ def sample_data():
 
 def test_get_data_filtering(sample_data):
     """Тест корректности фильтрации по городу и зарплате"""
-    v = Vacancy(sample_data)
-    result = v.get_data(city_filter="Казань", salary_from="50000")
+    v = Vacancy(sample_data, city_filter="Казань", salary_from="50000")
+    result = v.get_data()
 
     assert len(result) == 1
     assert result[0]["id"] == "101"
@@ -48,15 +48,15 @@ def test_get_data_filtering(sample_data):
 
 def test_get_data_no_results(sample_data):
     """Тест случая, когда вакансии не найдены"""
-    v = Vacancy(sample_data)
-    result = v.get_data(city_filter="Казань", experience="moreThan6")
+    v = Vacancy(sample_data, city_filter="Казань", experience="moreThan6")
+    result = v.get_data()
     assert result == []
 
 
 def test_show_data_output(sample_data, capsys):
     """Тест вывода в консоль через show_data"""
-    v = Vacancy(sample_data)
-    v.show_data(city_filter="Казань", salary_from="50000")
+    v = Vacancy(sample_data, city_filter="Казань", salary_from="50000")
+    v.show_data()
     captured = capsys.readouterr()
     assert "Python Developer" in captured.out
     assert "Tech Corp" in captured.out
@@ -65,7 +65,6 @@ def test_show_data_output(sample_data, capsys):
 
 def test_empty_city_default(sample_data):
     """Тест дефолтного значения города, если передан None/пустая строка"""
-    v = Vacancy(sample_data)
-    result = v.get_data(city_filter="")
+    v = Vacancy(sample_data, city_filter="")
+    result = v.get_data()
     assert all(res["area"] == "Казань" for res in result)
-

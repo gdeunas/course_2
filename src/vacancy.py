@@ -11,6 +11,7 @@ class Vacancy:
         "currency",
         "experience",
         "type_id",
+        "text"
     ]
 
     def __init__(
