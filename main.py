@@ -15,7 +15,7 @@ def user_interaction():
     vacancy_data = HH(filename).load_vacancies(keyword_input)
 
     # 2.Filtered data
-    filtered_data = Vacancy(vacancy_data)
+    filtered_data = Vacancy(vacancy_data, city_filter=city_filter)
     vacancy_filtered = filtered_data.get_data()
 
     if show_console.lower() == "да":
