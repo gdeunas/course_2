@@ -65,13 +65,7 @@ class Vacancy:
                 filtered_vacancies.append(vacancy_info)
         return filtered_vacancies
 
-    def show_data(self,
-            # city_filter: str = "Москва",
-            # salary_from: str = "50000",
-            # currency: str = "RUR",
-            # experience: str = "noExperience",
-            # type_id: str = "open",
-    ) -> None:
+    def show_data(self) -> None:
         """Выводит отфильтрованные вакансии в консоль"""
         vacancies = self.get_data()
 
