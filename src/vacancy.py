@@ -19,10 +19,12 @@ class Vacancy:
             city_filter: str = "Казань",
             salary_from: str = "50000",
             currency: str = "RUR",
-            experience: str = "noExperience",
+            experience=None,
             type_id: str = "open",
     ) -> None:
         # Инициализируем данные и фильтры как атрибуты класса
+        if experience is None:
+            experience = ['noExperience', 'between1And3','between3And6', 'moreThan6']
         self.hh = hh
         self.city_filter = city_filter
         self.salary_from = salary_from
@@ -48,7 +50,7 @@ class Vacancy:
             if not salary_info or salary_info.get("currency") != self.currency:
                 continue
             if (
-                    vacancy.get("experience", {}).get("id") != self.experience
+                    vacancy.get("experience", {}).get("id") not in self.experience
                     or vacancy.get("type", {}).get("id") != self.type_id
             ):
                 continue
