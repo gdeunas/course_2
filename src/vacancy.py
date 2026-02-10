@@ -36,8 +36,6 @@ class Vacancy:
         experience = ['noExperience', 'between1And3','between3And6', 'moreThan6']
         currency = ['RUR', 'USD', 'KZT']
         """
-        # if not city_filter:
-        #     city_filter = "Казань"
 
         salary_from_int = int(self.salary_from)
         filtered_vacancies = []
