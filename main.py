@@ -16,10 +16,10 @@ def user_interaction():
 
     # 2.Filtered data
     filtered_data = Vacancy(vacancy_data)
-    vacancy_filtered = filtered_data.get_data(city_filter=city_filter)
+    vacancy_filtered = filtered_data.get_data()
 
     if show_console.lower() == "да":
-        filtered_data.show_data(city_filter=city_filter)
+        filtered_data.show_data()
     print("Поиск вакансии завершен!")
 
     # 3. Store json to file
