@@ -15,22 +15,22 @@ class Vacancy:
 
     def __init__(
             self,
-            hh: list[dict[str, Any]],
-            city_filter: str = "Казань",
-            salary_from: str = "50000",
-            currency: str = "RUR",
-            experience=None,
-            type_id: str = "open",
+            __hh: list[dict[str, Any]],
+            __city_filter: str = "Казань",
+            __salary_from: str = "50000",
+            __currency: str = "RUR",
+            __experience: list[str] | None = None,
+            __type_id: str = "open",
     ) -> None:
         # Инициализируем данные и фильтры как атрибуты класса
-        if experience is None:
-            experience = ['noExperience', 'between1And3','between3And6', 'moreThan6']
-        self.hh = hh
-        self.city_filter = city_filter
-        self.salary_from = salary_from
-        self.currency = currency
-        self.experience = experience
-        self.type_id = type_id
+        if __experience is None:
+            experience = ['noExperience', 'between1And3', 'between3And6', 'moreThan6']
+        self.hh = __hh
+        self.city_filter = __city_filter
+        self.salary_from = __salary_from
+        self.currency = __currency
+        self.experience = __experience
+        self.type_id = __type_id
 
     def get_data(self) -> list[dict[str, Any]]:
         """filtered data
