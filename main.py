@@ -12,10 +12,11 @@ def user_interaction():
 
     # 1. Get data from Api requests
     filename = "vacancy.json"
+
     vacancy_data = HH(filename).load_vacancies(keyword_input)
 
     # 2.Filtered data
-    filtered_data = Vacancy(vacancy_data, __city_filter=city_filter)
+    filtered_data = Vacancy(vacancy_data, city_filter=city_filter)
     vacancy_filtered = filtered_data.get_data()
 
     if show_console.lower() == "да":

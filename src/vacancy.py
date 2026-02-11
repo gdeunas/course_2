@@ -7,30 +7,39 @@ class Vacancy:
     __slots__ = [
         "hh",
         "city_filter",
-        "salary_from",
-        "currency",
+        "__salary_from",
+        "__currency",
         "experience",
         "type_id",
     ]
 
     def __init__(
             self,
-            __hh: list[dict[str, Any]],
-            __city_filter: str = "Казань",
-            __salary_from: str = "50000",
-            __currency: str = "RUR",
-            __experience: list[str] | None = None,
-            __type_id: str = "open",
-    ) -> None:
+            hh: list[dict[str, Any]],
+            city_filter: str,
+            salary_from: str = "50000",
+            currency: str = "RUR",
+            experience: list[str] | None = None,
+            type_id: str = "open") -> None:
+
         # Инициализируем данные и фильтры как атрибуты класса
-        if __experience is None:
+        if experience is None:
             experience = ['noExperience', 'between1And3', 'between3And6', 'moreThan6']
-        self.hh = __hh
-        self.city_filter = __city_filter
-        self.salary_from = __salary_from
-        self.currency = __currency
-        self.experience = __experience
-        self.type_id = __type_id
+        self.hh = hh
+        self.city_filter = city_filter
+        self.__salary_from = salary_from
+        self.__currency = currency
+        self.experience = experience
+        self.type_id = type_id
+
+        @staticmethod
+        def __validate_salary(value: Any) -> int:
+            try:
+                return int(value) if value else 0
+            except (ValueError, TypeError):
+                return 0
+
+        __salary_from = str(__validate_salary(salary_from))
 
     def get_data(self) -> list[dict[str, Any]]:
         """filtered data
@@ -39,7 +48,10 @@ class Vacancy:
         currency = ['RUR', 'USD', 'KZT']
         """
 
-        salary_from_int = int(self.salary_from)
+        if self.city_filter is None:
+            city_filter = "Казань"
+
+        salary_from_int = int(self.__salary_from)
         filtered_vacancies = []
 
         for vacancy in self.hh:
@@ -47,7 +59,7 @@ class Vacancy:
             if area_name != self.city_filter:
                 continue
             salary_info = vacancy.get("salary", {})
-            if not salary_info or salary_info.get("currency") != self.currency:
+            if not salary_info or salary_info.get("currency") != self.__currency:
                 continue
             if (
                     vacancy.get("experience", {}).get("id") not in self.experience
@@ -59,7 +71,7 @@ class Vacancy:
                 vacancy_info = {
                     "id": vacancy.get("id"),
                     "name": vacancy["name"],
-                    "salary": f"{salary_info.get('from', 0)} {self.currency}",
+                    "salary": f"{salary_info.get('from', 0)} {self.__currency}",
                     "employer": vacancy.get("employer", {}).get("name", "N/A"),
                     "url": f"https://hh.ru/vacancy/{vacancy['id']}",
                     "area": area_name,
